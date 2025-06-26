@@ -1,6 +1,10 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include  # <- Asegurate de importar 'include'
 
 urlpatterns = [
-path('', views.lista_public, name=' lista_public'),
+    path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
+
 ]
+
+

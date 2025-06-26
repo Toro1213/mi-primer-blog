@@ -18,5 +18,7 @@ def lista_public(request):
         'usuarios':ususarios,
         'usuario_activo':usuario_activo
     })
-
+def lista_rugby(request):
+    jugadores = JugadorRugby.objects.all()
+    return render(request, 'lista_rugby.html', {'jugadores': jugadores})
 

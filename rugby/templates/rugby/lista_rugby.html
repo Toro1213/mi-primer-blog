@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugadores de Rugby</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+    <h1>Listado de Jugadores de Rugby</h1>
+
+    <!-- FORMULARIO DE FILTROS -->
+    <form method="get" class="filtros-form">
+        <input type="text" name="nombre" placeholder="Nombre" value="{{ request.GET.nombre }}">
+        <input type="text" name="equipo" placeholder="Equipo" value="{{ request.GET.equipo }}">
+        <input type="number" name="edad_min" placeholder="Edad mín" value="{{ request.GET.edad_min }}">
+        <input type="number" name="edad_max" placeholder="Edad máx" value="{{ request.GET.edad_max }}">
+        <input type="number" name="puntos_min" placeholder="Puntos mín" value="{{ request.GET.puntos_min }}">
+        <input type="number" name="puntos_max" placeholder="Puntos máx" value="{{ request.GET.puntos_max }}">
+        <input type="number" name="tries_min" placeholder="Tries mín" value="{{ request.GET.tries_min }}">
+        <input type="number" name="tries_max" placeholder="Tries máx" value="{{ request.GET.tries_max }}">
+
+        <button type="submit">Filtrar</button>
+        <a href="{% url 'lista_rugby' %}" class="limpiar-btn">Limpiar filtros</a>
+    </form>
+
+    <h3>Ordenar por:</h3>
+    <a href="?orden=nombre">Nombre</a> |
+    <a href="?orden=-edad">Edad (desc)</a> |
+    <a href="?orden=edad">Edad (asc)</a> |
+    <a href="?orden=-puntos">Puntos (desc)</a> |
+    <a href="?orden=puntos">Puntos (asc)</a> |
+    <a href="?orden=-tries">Tries (desc)</a> |
+    <a href="?orden=tries">Tries (asc)</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Equipo</th>
+                <th>Partidos Jugados</th>
+                <th>Tries</th>
+                <th>Puntos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jugador in jugadores %}
+            <tr>
+                <td>
+                    <a href="{{ jugador.url }}" target="_blank" class="jugador-info">
+                        <div class="jugador-texto">
+                            {{ jugador.nombre }}
+                        </div>
+                        <div class="jugador-img-box">
+                            {% if jugador.imagen %}
+                                <img src="{{ jugador.imagen.url }}" alt="{{ jugador.nombre }}">
+                            {% else %}
+                                <img src="{% static 'img/default-avatar.png' %}" alt="Sin imagen">
+                            {% endif %}
+                        </div>
+                    </a>
+                </td>
+                <td>{{ jugador.edad }}</td>
+                <td>{{ jugador.equipo }}</td>
+                <td>{{ jugador.partidos_jugados }}</td>
+                <td>{{ jugador.tries }}</td>
+                <td>{{ jugador.puntos }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
