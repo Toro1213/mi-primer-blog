@@ -54,7 +54,7 @@
                         </div>
                         <div class="jugador-img-box">
                             {% if jugador.imagen %}
-                                <img src="{{ jugador.imagen.url }}" alt="{{ jugador.nombre }}">
+                                <img src="{{ jugador.imagen }}" alt="{{ jugador.nombre }}">
                             {% else %}
                                 <img src="{% static 'img/default-avatar.png' %}" alt="Sin imagen">
                             {% endif %}

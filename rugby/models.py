@@ -8,7 +8,7 @@ class JugadorRugby(models.Model):
     tries = models.IntegerField()
     puntos = models.IntegerField()
     url = models.TextField(null=True, blank=True)
-    imagen = models.ImageField(upload_to='static/img/jugadores/', null=True, blank=True)
+    imagen = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.nombre} - {self.equipo}"
